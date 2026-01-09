@@ -17,14 +17,18 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Grant execute permission
-      run: chmod +x gradlew
+   - name: Install Gradle
+  run: sudo apt-get update && sudo apt-get install -y gradle
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+- name: Generate Gradle Wrapper
+  run: gradle wrapper
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
+- name: Grant execute permission
+  run: chmod +x gradlew
+
+- name: Build Debug APK
+  run: ./gradlew assembleDebug
+
       with:
         name: DengueCare-APK
         path: app/build/outputs/apk/debug/*.apk
